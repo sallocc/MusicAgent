@@ -1,0 +1,20 @@
+# Core HTTP and API
+requests>=2.31.0
+requests-oauthlib>=1.3.1
+urllib3>=2.0.0
+
+# Data Modeling and Validation
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Environment Configuration
+python-dotenv>=1.0.0
+
+# Logging Enhancements
+python-json-logger>=2.0.7
+
+# Data Export
+pandas>=2.0.0
+
+# Type Hints (Python 3.8 compatibility)
+typing-extensions>=4.5.0
