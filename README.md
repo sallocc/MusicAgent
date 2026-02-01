@@ -15,6 +15,7 @@ This project provides a **production-ready, enterprise-grade Python foundation**
 - ✅ **Structured Logging**: JSON logs with file rotation
 - ✅ **Error Handling**: Custom exception hierarchy
 - ✅ **Multi-Format Export**: JSON and CSV support
+- ✅ **MCP Server Integration**: AI tool integration via Model Context Protocol
 - ✅ **Well Documented**: Comprehensive docstrings and examples
 
 ## 📋 Prerequisites
@@ -39,6 +40,9 @@ python -m venv venv
 venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
+
+#Install local dependencies
+pip install -e .
 
 # Install dependencies
 pip install -r requirements.txt
@@ -88,13 +92,50 @@ MusicAgent/
 │       ├── utils/            # Rate limiter, logger, retry handler
 │       ├── output/           # Data exporters (JSON, CSV)
 │       └── config/           # Configuration management
-├── plans/                    # Architecture documentation
-├── logs/                     # Log files (auto-created)
-├── exports/                  # Export output (auto-created)
-├── requirements.txt          # Production dependencies
-├── .env.example             # Configuration template
-└── README.md                # This file
+├── mcp_server/              # MCP server for AI tool integration
+│   ├── discogs_server.py    # MCP server implementation
+│   ├── README.md            # MCP server documentation
+│   └── requirements.txt     # MCP dependencies
+├── docs/                    # Documentation
+│   └── MCP_SERVER_GUIDE.md  # MCP integration guide
+├── plans/                   # Architecture documentation
+├── logs/                    # Log files (auto-created)
+├── exports/                 # Export output (auto-created)
+├── requirements.txt         # Production dependencies
+├── .env.example            # Configuration template
+└── README.md               # This file
 ```
+
+## 🤖 MCP Server for AI Integration
+
+This project includes a **Model Context Protocol (MCP) server** that enables AI tools and workflows to interact with the Discogs API through a standardized interface.
+
+### Available Tools
+
+The MCP server provides 6 powerful tools:
+
+1. **`get_collection_releases`** - Browse your Discogs collection with pagination and sorting
+2. **`add_release_to_collection`** - Add releases to your collection
+3. **`create_user_list`** - Create custom lists for organizing releases
+4. **`search_by_artist`** - Search the Discogs database by artist name
+5. **`search_by_title`** - Search by song or album title
+6. **`search_by_genre`** - Filter releases by genre
+
+All tools return **Markdown-formatted responses** instead of raw JSON for better readability in AI workflows.
+
+### Quick Setup
+
+1. Ensure your `.env` file has your Discogs API token configured
+2. Install the MCP package: `pip install mcp`
+3. The server is already configured in your MCP settings
+
+See the **[MCP Server Integration Guide](docs/MCP_SERVER_GUIDE.md)** for detailed documentation.
+
+### Example AI Workflows
+
+- **Music Discovery**: "Find me some Jazz albums from the 1960s"
+- **Collection Management**: "Add the top-rated Miles Davis albums to my collection"
+- **Data Analysis**: "What genres are most represented in my collection?"
 
 ## 🔧 Core Components
 
@@ -301,6 +342,8 @@ response = fetch_with_retry("artists/12345")
 
 ## 📚 Documentation
 
+### Core Documentation
+
 Comprehensive architecture documentation is available in the [`plans/`](plans/) directory:
 
 - **[Architecture Overview](plans/discogs_api_architecture.md)** - Complete system design
@@ -309,6 +352,11 @@ Comprehensive architecture documentation is available in the [`plans/`](plans/) 
 - **[Usage Examples](plans/example_usage.md)** - Complete example scripts
 - **[Implementation Guide](plans/implementation_guide.md)** - Step-by-step setup guide
 - **[Project Summary](plans/PROJECT_SUMMARY.md)** - Executive overview
+
+### MCP Server Documentation
+
+- **[MCP Server Integration Guide](docs/MCP_SERVER_GUIDE.md)** - Complete guide to using the MCP server
+- **[MCP Server README](mcp_server/README.md)** - Server features and setup
 
 ## 🔒 Security Best Practices
 
