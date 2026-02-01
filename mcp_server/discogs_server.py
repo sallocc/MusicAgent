@@ -146,33 +146,32 @@ def format_search_results(data: Dict[str, Any], search_type: str = "general") ->
     return "\n".join(md)
 
 
-def format_list_creation(data: Dict[str, Any]) -> str:
+def format_folder_creation(data: Dict[str, Any]) -> str:
     """
-    Format list creation response as markdown.
+    Format collection folder creation response as markdown.
     
     Args:
-        data: Response from list creation API
+        data: Response from folder creation API
         
     Returns:
         Markdown formatted string
     """
     md = []
-    md.append("# List Created Successfully\n")
+    md.append("# Collection Folder Created Successfully\n")
     
     if 'id' in data:
-        md.append(f"**List ID:** {data['id']}")
+        md.append(f"**Folder ID:** {data['id']}")
     
     if 'name' in data:
         md.append(f"**Name:** {data['name']}")
     
-    if 'description' in data:
-        md.append(f"**Description:** {data['description']}")
-    
-    if 'public' in data:
-        md.append(f"**Public:** {data['public']}")
+    if 'count' in data:
+        md.append(f"**Item Count:** {data['count']}")
     
     if 'resource_url' in data:
         md.append(f"**Resource URL:** {data['resource_url']}")
+    
+    md.append("\n✅ You can now add releases to this folder using the `add_release_to_collection` tool with this folder ID.")
     
     return "\n".join(md)
 
@@ -282,11 +281,11 @@ async def list_tools() -> List[Tool]:
             }
         ),
         Tool(
-            name="create_user_list",
-            description="""Create a new custom list for organizing releases in your Discogs account. Lists can be 
-            used to group releases thematically (e.g., 'Favorites', 'To Sell', 'Summer Vibes'). Specify a name and 
-            optional description. You can set the list as public or private. Returns the created list details including 
-            the list ID in markdown format. After creating a list, you can add items to it using the Discogs web interface.""",
+            name="create_collection_folder",
+            description="""Create a new folder in your Discogs collection to organize your releases. Collection folders
+            help you categorize your music (e.g., 'Vinyl', 'CDs', 'Want List', 'For Sale'). Specify a name for the folder.
+            Returns the created folder details including the folder ID in markdown format. After creating a folder, you can
+            add releases to it using the add_release_to_collection tool by specifying the folder_id parameter.""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -296,17 +295,7 @@ async def list_tools() -> List[Tool]:
                     },
                     "name": {
                         "type": "string",
-                        "description": "Name for the new list"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Optional description for the list",
-                        "default": ""
-                    },
-                    "public": {
-                        "type": "boolean",
-                        "description": "Whether the list should be public (default: true)",
-                        "default": True
+                        "description": "Name for the new collection folder"
                     }
                 },
                 "required": ["username", "name"]
@@ -439,23 +428,19 @@ async def call_tool(name: str, arguments: Any) -> List[TextContent]:
             markdown_output = format_add_to_collection(response, release_id)
             return [TextContent(type="text", text=markdown_output)]
         
-        elif name == "create_user_list":
+        elif name == "create_collection_folder":
             username = arguments["username"]
             name_arg = arguments["name"]
-            description = arguments.get("description", "")
-            public = arguments.get("public", True)
             
-            # Create list
+            # Create collection folder
             response = client.post(
-                f"users/{username}/lists",
+                f"users/{username}/collection/folders",
                 json={
-                    "name": name_arg,
-                    "description": description,
-                    "public": public
+                    "name": name_arg
                 }
             )
             
-            markdown_output = format_list_creation(response)
+            markdown_output = format_folder_creation(response)
             return [TextContent(type="text", text=markdown_output)]
         
         elif name == "search_by_artist":

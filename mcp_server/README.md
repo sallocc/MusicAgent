@@ -34,19 +34,17 @@ Adds a release to your Discogs collection.
 - `release_id` (required): The Discogs release ID to add
 - `folder_id` (optional): Collection folder ID (default: 1 - Uncategorized)
 
-### 3. **create_user_list**
-Creates a custom list for organizing releases.
+### 3. **create_collection_folder**
+Creates a new folder in your Discogs collection to organize your releases.
 
 **Use cases:**
-- Create thematic lists (e.g., "Favorites", "To Sell", "Summer Vibes")
-- Organize your collection beyond standard folders
-- Share curated lists with the community
+- Create custom folders to categorize your collection (e.g., "Vinyl", "CDs", "Want List", "For Sale")
+- Organize releases by format, genre, or any custom criteria
+- Manage your collection with better structure
 
 **Parameters:**
 - `username` (required): Your Discogs username
-- `name` (required): Name for the new list
-- `description` (optional): Description for the list
-- `public` (optional): Whether the list should be public (default: true)
+- `name` (required): Name for the new collection folder
 
 ### 4. **search_by_artist**
 Search the Discogs database for releases by artist name.

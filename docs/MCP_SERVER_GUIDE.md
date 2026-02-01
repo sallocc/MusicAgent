@@ -57,26 +57,25 @@ Add release ID 123456 to my collection
 
 ---
 
-### 3. `create_user_list`
+### 3. `create_collection_folder`
 
-Create a custom list for organizing releases.
+Create a new folder in your Discogs collection to organize your releases.
 
 **Example Usage:**
 ```
-Create a public list called "Jazz Favorites" with description "My favorite jazz albums"
+Create a collection folder called "Vinyl Classics"
 ```
 
 **Parameters:**
 - `username` (required): Your Discogs username
-- `name` (required): Name for the new list
-- `description` (optional): Description for the list
-- `public` (optional): Whether the list should be public (default: true)
+- `name` (required): Name for the new collection folder
 
 **Returns:** Markdown details including:
-- List ID
-- Name and description
-- Public/private status
+- Folder ID
+- Folder name
+- Item count
 - Resource URL
+- Instructions on how to add releases to the folder
 
 ---
 
@@ -195,9 +194,9 @@ After restarting your IDE or reloading the MCP servers, you should see the Disco
    Add release ID 123456 to my collection
    ```
 
-4. **Organize with lists:**
+4. **Organize with folders:**
    ```
-   Create a list called "Electronic Favorites"
+   Create a collection folder called "Electronic Favorites"
    ```
 
 ### Exploring Your Collection
