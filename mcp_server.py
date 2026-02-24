@@ -388,7 +388,7 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             
             endpoint = f"users/{username}/collection/folders"
             data = {"name": folder_name}
-            response = client.post(endpoint, data=data)
+            response = client.post(endpoint, json=data)
             
             folder_id = response.get("id", "N/A")
             name = response.get("name", "N/A")
