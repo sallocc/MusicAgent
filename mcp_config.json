@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "discogs": {
+      "command": "python",
+      "args": [
+        "-m",
+        "mcp_server"
+      ],
+      "env": {
+        "DISCOGS_API_TOKEN": "${DISCOGS_API_TOKEN}",
+        "DISCOGS_USER_AGENT": "${DISCOGS_USER_AGENT}"
+      }
+    }
+  }
+}
