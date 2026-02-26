@@ -18,3 +18,5 @@ pandas>=2.0.0
 
 # Type Hints (Python 3.8 compatibility)
 typing-extensions>=4.5.0
+
+mcp>=0.9.0

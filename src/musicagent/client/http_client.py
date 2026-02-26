@@ -216,12 +216,13 @@ class DiscogsHTTPClient:
         self.rate_limiter.acquire()
 
         # Log request
-        self.request_logger.log_request(
-            method=method,
-            url=url,
-            params=kwargs.get("params"),
-            request_id=request_id,
-        )
+        # Disabling logging for MCP integration due to JSON-RPC errors
+        # self.request_logger.log_request(
+        #     method=method,
+        #     url=url,
+        #     params=kwargs.get("params"),
+        #     request_id=request_id,
+        # )
 
         # Make request
         start_time = time.time()
@@ -235,12 +236,13 @@ class DiscogsHTTPClient:
             response_time = time.time() - start_time
 
             # Log response
-            self.request_logger.log_response(
-                status_code=response.status_code,
-                response_time=response_time,
-                request_id=request_id,
-                size=len(response.content) if response.content else 0,
-            )
+            # Disabling logging for MCP integration due to JSON-RPC errors
+            # self.request_logger.log_response(
+            #     status_code=response.status_code,
+            #     response_time=response_time,
+            #     request_id=request_id,
+            #     size=len(response.content) if response.content else 0,
+            # )
 
             # Handle response
             return self._handle_response(response, request_id)
